@@ -30,51 +30,89 @@ namespace ChromiumBrowser
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Browser));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.ButtonGo = new System.Windows.Forms.ToolStripButton();
-            this.AddresBar = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.ButtonBack = new System.Windows.Forms.ToolStripButton();
+            this.ButtonForward = new System.Windows.Forms.ToolStripButton();
+            this.AddressBar = new System.Windows.Forms.ToolStripTextBox();
+            this.ButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDarkmode = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ButtonGo,
-            this.AddresBar});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1033, 54);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ButtonBack,
+            this.ButtonForward,
+            this.AddressBar,
+            this.ButtonRefresh,
+            this.ButtonDarkmode});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(1033, 57);
+            this.toolStrip.TabIndex = 0;
+            this.toolStrip.Text = "toolStrip1";
             // 
-            // ButtonGo
+            // ButtonBack
             // 
-            this.ButtonGo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ButtonGo.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ButtonGo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonGo.Image")));
-            this.ButtonGo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonGo.Name = "ButtonGo";
-            this.ButtonGo.Size = new System.Drawing.Size(65, 49);
-            this.ButtonGo.Text = "Go";
-            this.ButtonGo.Click += new System.EventHandler(this.ButtonGo_Click);
+            this.ButtonBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonBack.Image = ((System.Drawing.Image)(resources.GetObject("ButtonBack.Image")));
+            this.ButtonBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonBack.Name = "ButtonBack";
+            this.ButtonBack.Size = new System.Drawing.Size(36, 52);
+            this.ButtonBack.Text = "🢀";
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // AddresBar
+            // ButtonForward
             // 
-            this.AddresBar.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.AddresBar.Name = "AddresBar";
-            this.AddresBar.Size = new System.Drawing.Size(600, 54);
+            this.ButtonForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonForward.Image = ((System.Drawing.Image)(resources.GetObject("ButtonForward.Image")));
+            this.ButtonForward.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonForward.Name = "ButtonForward";
+            this.ButtonForward.Size = new System.Drawing.Size(36, 52);
+            this.ButtonForward.Text = "🢂";
+            this.ButtonForward.Click += new System.EventHandler(this.ButtonForward_Click);
+            // 
+            // AddressBar
+            // 
+            this.AddressBar.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.AddressBar.Name = "AddressBar";
+            this.AddressBar.Size = new System.Drawing.Size(600, 57);
+            this.AddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddresBar_KeyDown);
+            // 
+            // ButtonRefresh
+            // 
+            this.ButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonRefresh.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.ButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRefresh.Image")));
+            this.ButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonRefresh.Name = "ButtonRefresh";
+            this.ButtonRefresh.Size = new System.Drawing.Size(48, 52);
+            this.ButtonRefresh.Text = "⭮";
+            this.ButtonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
+            // 
+            // ButtonDarkmode
+            // 
+            this.ButtonDarkmode.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ButtonDarkmode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonDarkmode.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDarkmode.Image")));
+            this.ButtonDarkmode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDarkmode.Name = "ButtonDarkmode";
+            this.ButtonDarkmode.Size = new System.Drawing.Size(41, 52);
+            this.ButtonDarkmode.Text = "🌓";
+            this.ButtonDarkmode.Click += new System.EventHandler(this.ButtonDarkmode_Click);
             // 
             // Browser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1033, 529);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.toolStrip);
             this.Name = "Browser";
             this.Text = "Form1";
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,9 +120,12 @@ namespace ChromiumBrowser
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton ButtonGo;
-        private System.Windows.Forms.ToolStripTextBox AddresBar;
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStripButton ButtonRefresh;
+        private System.Windows.Forms.ToolStripTextBox AddressBar;
+        private System.Windows.Forms.ToolStripButton ButtonBack;
+        private System.Windows.Forms.ToolStripButton ButtonForward;
+        private System.Windows.Forms.ToolStripButton ButtonDarkmode;
     }
 }
 
