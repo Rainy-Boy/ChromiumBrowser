@@ -15,7 +15,7 @@ namespace ChromiumBrowser
     public partial class Browser : Form
     {
         public ChromiumWebBrowser chromeBrowser = null;
-        private string initialUrl = "https://datorium.eu";
+        private string initialUrl = "https://github.com/Rainy-Boy";
         private bool lightmode = true;
 
         public Browser()
@@ -29,12 +29,9 @@ namespace ChromiumBrowser
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
-            // Create a browser component
-            chromeBrowser = new ChromiumWebBrowser(initialUrl);
-            // Add it to the form and fill it to the form window.
-            AddressBar.Text = chromeBrowser.Address;
-            this.Controls.Add(chromeBrowser);
-            chromeBrowser.Dock = DockStyle.Fill;
+            // Create the first browser tab
+            BrowserTabs.TabPages.Clear();
+            AddBrowserTab();
         }
 
         private void ButtonRefresh_Click(object sender, EventArgs e)
@@ -57,20 +54,27 @@ namespace ChromiumBrowser
 
         private void AddresBar_KeyDown(object sender, KeyEventArgs e)
         {
-            string url = AddressBar.Text;
-
-            if (e.KeyCode == Keys.Enter)
+            if(e.KeyCode == Keys.Enter)
             {
-                if (url.Contains("http://www") || url.Contains("https://www"))
-                {
-                    chromeBrowser.Load(url);
-                }
-                else
-                {
-                    chromeBrowser.Load($"https://duckduckgo.com/?t=ffab&q= {url}");
-                }
+                Navigate();
             }
-            
+        }
+
+        private void Navigate()
+        {
+            string url = AddressBar.Text;
+            chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+
+            if (url.Contains("http://") || url.Contains("https://") || url.Contains("www."))
+            {
+                chromeBrowser.Load(url);
+                
+            }
+            else
+            {
+                chromeBrowser.Load($"https://duckduckgo.com/?q= {url}");
+            }
+            AddressBar.Text = chromeBrowser.Address;
         }
 
         private void ButtonDarkmode_Click(object sender, EventArgs e)
@@ -89,6 +93,31 @@ namespace ChromiumBrowser
                 AddressBar.ForeColor = Color.Black;
                 lightmode = true;
             }
+            
+        }
+
+        private void ButtonAddTab_Click(object sender, EventArgs e)
+        {
+            AddBrowserTab();
+        }
+
+        private void AddBrowserTab()
+        {
+            var tp = new TabPage();
+            tp.Text = "Tab";
+            BrowserTabs.TabPages.Add(tp);
+            var browser = new ChromiumWebBrowser(initialUrl);
+            tp.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
+        }
+
+        private void BrowserTabs_Selected(object sender, TabControlEventArgs e)
+        {
+            chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+        }
+
+        private void ButtonTabRemove_Click(object sender, EventArgs e)
+        {
             
         }
     }
