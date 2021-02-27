@@ -63,7 +63,7 @@ namespace ChromiumBrowser
         private void Navigate()
         {
             string url = AddressBar.Text;
-            chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+            
 
             if (url.Contains("http://") || url.Contains("https://") || url.Contains("www."))
             {
@@ -109,6 +109,9 @@ namespace ChromiumBrowser
             var browser = new ChromiumWebBrowser(initialUrl);
             tp.Controls.Add(browser);
             browser.Dock = DockStyle.Fill;
+
+            chromeBrowser = browser;
+            BrowserTabs.SelectTab(tp);
         }
 
         private void BrowserTabs_Selected(object sender, TabControlEventArgs e)
@@ -118,7 +121,19 @@ namespace ChromiumBrowser
 
         private void ButtonTabRemove_Click(object sender, EventArgs e)
         {
-            
+            RemoveBrowserTab();
+        }
+
+        private void RemoveBrowserTab()
+        {
+            var tp = BrowserTabs.TabPages[BrowserTabs.TabPages.Count - 1];
+
+            if (BrowserTabs.TabPages.Count > 1)
+            {
+                BrowserTabs.TabPages.Remove(BrowserTabs.SelectedTab);
+                tp = BrowserTabs.TabPages[BrowserTabs.TabPages.Count - 1];
+                BrowserTabs.SelectTab(tp);
+            }
         }
     }
 }
